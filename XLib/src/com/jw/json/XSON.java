@@ -32,7 +32,7 @@ public class XSON {
 	 * @param methodName
 	 * @param value
 	 */
-	public <T extends Object> void invokeBeanMethod(Object methodOwner, String methodName, T value) {
+	public <T extends Object> void callBeanMethod(Object methodOwner, String methodName, T value) {
 		try {
 			Method method = methodOwner.getClass().getMethod(
 					methodName, new java.lang.Class[] {value.getClass()});
@@ -85,7 +85,7 @@ public class XSON {
 			}
 		}
 		Field[] a = new Field[flist.size()];
-		return flist.toArray(a );
+		return flist.toArray(a);
 	}
 
 	/**
