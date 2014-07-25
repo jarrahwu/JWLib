@@ -1,7 +1,5 @@
 package com.jw.json;
 
-import org.codehaus.jackson.annotate.JsonIgnoreProperties;
-
 /**
  * jackson 的用法
  * 
@@ -13,7 +11,6 @@ import org.codehaus.jackson.annotate.JsonIgnoreProperties;
  * 	  array		 对应 ArrayList<Object> 或者 ArrayList<T> T 为bean里面的匿名类 就是 static class，匿名类也要进行属性解析，声明变量
  * 	  JSON null  对应 java null
  */
-@JsonIgnoreProperties({"a","b"})
-public class JacksonUsage {
-	
-}
+//public class JacksonUsage {
+//	
+//}

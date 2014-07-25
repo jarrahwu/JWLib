@@ -2,11 +2,18 @@ package com.jw.json;
 
 import java.io.File;
 import java.io.IOException;
+import java.io.StringWriter;
 
+import org.codehaus.jackson.JsonFactory;
+import org.codehaus.jackson.JsonGenerationException;
+import org.codehaus.jackson.JsonGenerator;
 import org.codehaus.jackson.JsonParseException;
 import org.codehaus.jackson.map.JsonMappingException;
 import org.codehaus.jackson.map.ObjectMapper;
 import org.json.JSONObject;
+
+import com.jw.util.JSONUtil;
+import com.jw.util.L;
 
 
 public class JacksonWrapper {
@@ -17,7 +24,7 @@ public class JacksonWrapper {
 	 * @param valueType 保存的对象类型
 	 * @return
 	 */
-	public static <T> T fromJSONObject(JSONObject obj, Class<T> valueType) {
+	public static <T> T json2Bean(JSONObject obj, Class<T> valueType) {
 		ObjectMapper objectMapper = new ObjectMapper();
 		T ret = null;
 		try {
@@ -38,7 +45,7 @@ public class JacksonWrapper {
 	 * @param valueType 保存的对象类型
 	 * @return
 	 */
-	public static <T> T fromJSONFile(File file, Class<T> valueType) {
+	public static <T> T file2Bean(File file, Class<T> valueType) {
 		ObjectMapper objectMapper = new ObjectMapper();
 		T ret = null;
 		try {
@@ -52,4 +59,29 @@ public class JacksonWrapper {
 		}
 		return ret;
 	}
+	
+	
+	/**
+	 *  bean到json时。默认是转换成timestamp类型的，即相对1970年1月1日的毫秒数。 
+    	 *	可以进行设置，设置成你想要的格式。 
+ 	 *
+	 *	objectMapper.configure(SerializationConfig.Feature.WRITE_DATES_AS_TIMESTAMPS, false);//关闭时间戳输出，此时是ISO格式  
+    	 *	objectMapper.setDateFormat(myDateFormat);//设置自己的格式  
+	 * 
+	 */
+	public static JSONObject bean2JSONObject(Object obj) {
+		ObjectMapper mapper = new ObjectMapper();
+		String json = "";
+		try {
+			json = mapper.writeValueAsString(obj);
+		} catch (JsonGenerationException e) {
+			e.printStackTrace();
+		} catch (JsonMappingException e) {
+			e.printStackTrace();
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+		return JSONUtil.createJSONObject(json);
+	}
+	
 }

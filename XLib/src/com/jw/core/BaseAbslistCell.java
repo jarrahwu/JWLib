@@ -10,17 +10,17 @@ import android.util.AttributeSet;
  * @author JarrahWu
  * listView 的 每个 item 的基类
  */
-public abstract class BaseDataItemView extends BaseView{
+public abstract class BaseAbslistCell extends BaseView{
 
 	protected JSONObject mData;
 
 	protected int mPosition;
 
-	public BaseDataItemView(Context context) {
+	public BaseAbslistCell(Context context) {
 		super(context);
 	}
 
-	public BaseDataItemView(Context context, AttributeSet attrs) {
+	public BaseAbslistCell(Context context, AttributeSet attrs) {
 		super(context, attrs);
 	}
 	/**
